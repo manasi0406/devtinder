@@ -1,6 +1,8 @@
 const mongoose=require("mongoose");
 const connectionreqschema= mongoose.Schema({
 fromuserid:{
+    ref:"User",//refrence to the user that is present in the user schema this is usedd when user get all connection pending connection req with user info
+
 type:mongoose.Schema.Types.ObjectId,
 required:true
 

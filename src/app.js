@@ -10,13 +10,13 @@ const User = require("./config/models/user");
 const bcrypt=require("bcrypt");
 const connectdb = require("./config/database");
 app.use(express.json());
-
+const userrouter=require("./routes/user.js");
 
 const authrouter=require("./routes/auth.js");
 const profilerouter=require("./routes/profile.js");
 const reqrouter=require("./routes/request.js");
 app.use("/",authrouter);
-
+app.use("/",userrouter);
 app.use("/",profilerouter);
 app.use("/",reqrouter);
 

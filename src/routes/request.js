@@ -115,3 +115,8 @@ reqrouter.post(
 );
 
 module.exports = reqrouter;
+//cornercases of connection rwquest
+//what if the status is invalid
+//what if the id that we are sending req is not present in the database
+//what if the a is intrested in b and b is also interested in a doesnt make sense to store both of them
+//what is a is sending req to a 
