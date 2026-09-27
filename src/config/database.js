@@ -5,5 +5,4 @@ const connectdb = async () => {
      "mongodb+srv://manasirathi50_db_user:manasi0406@cluster0.oi2lcng.mongodb.net/devtinder"
     );
 };
-
 module.exports = connectdb;

@@ -1,5 +1,9 @@
+const dns = require("dns");
+dns.setServers(["8.8.8.8"]);
+
 const express = require("express");
 const app = express();
+
 const cookieparser=require("cookie-parser");
 app.use(cookieparser());
 const { validateEditProfileData } = require("./utils/validation");
@@ -11,10 +15,18 @@ const bcrypt=require("bcrypt");
 const connectdb = require("./config/database");
 app.use(express.json());
 const userrouter=require("./routes/user.js");
-
+//to come in same origin
+const cors=require("cors");
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 const authrouter=require("./routes/auth.js");
 const profilerouter=require("./routes/profile.js");
 const reqrouter=require("./routes/request.js");
+
 app.use("/",authrouter);
 app.use("/",userrouter);
 app.use("/",profilerouter);
@@ -38,33 +50,6 @@ try{
 //login 
 
 
-app.post("/login",async(req,res)=>{
-try{
-
-    const { emailid,password}=req.body;
-    const user=await User.findOne({emailid:emailid});
-    if(!user){
-        throw new Error("email id is not present in the db");
-    }
-    const ispassvalid=await bcrypt.compare(password,user.password)
-    if(ispassvalid){
-// creating jwt
-const token =await user.getJWT();
-
-
-
-// sending back jwt 
-
-res.cookie("token",token);
-        res.send("login successful !!");
-    }else{
-        res.send("pass is incorrect");
-    }
-}
-catch (err) {
-        res.status(400).send("ERROR : " + err.message);
-}
-});
 
 
 
