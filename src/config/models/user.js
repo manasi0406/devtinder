@@ -44,14 +44,14 @@ about :{
 skills:{
     type:[String],
 },
-photourl:{
-    type:String,
-    default :"https://www.magnific.com/free-photos-vectors/dummy-person",
-    validate(value){
-    if(!validator.isURL(value))
-        throw new Error("email is invalid");
+photourl: {
+  type: String,
+  default: "https://i.pravatar.cc/300",
+  validate(value) {
+    if (!validator.isURL(value))
+      throw new Error("photourl is invalid");
+  }
 }
-},
 },
 
 {

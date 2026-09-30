@@ -6,17 +6,19 @@ const User = require("../config/models/user");
 const authUser = require("../middlewares/auth");
 const { validateEditProfileData } = require("../utils/validation");
 //view profile
-profilerouter.get("/profile/view",authUser,async(req,res)=>{
-try{
-    const user=req.user;
-    
-    res.send(user);
-}
-catch (err) {
-        res.status(400).send("ERROR : " + err.message);
-}
-});
+profilerouter.get("/profile/view", authUser, async (req, res) => {
+    try {
+        const user = req.user;
 
+        const userObj = user.toObject();
+        delete userObj.password;
+
+        res.send(userObj);
+
+    } catch (err) {
+        res.status(400).send("ERROR : " + err.message);
+    }
+});
 //edit profile
 
 
